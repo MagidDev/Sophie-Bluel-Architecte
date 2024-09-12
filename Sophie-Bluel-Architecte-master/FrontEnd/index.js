@@ -1,13 +1,25 @@
+const gallery = document.querySelector(".gallery");
+
+let works = []
+let categories = []
+
 async function getWorks() {
-    try {
-        // Appel à l'API pour récupérer les projets
-        const response = await fetch("http://localhost:5678/api/works");
-        const projects = await response.json();  // On transforme la réponse en format JSON
+    const response = await fetch("http://localhost:5678/api/works");
+    const data = await response.json();  // On transforme la réponse en format JSON
 
-        console.log(projects);  // Affiche tous les projets dans la console
+    works = data;
+}
 
-        const gallery = document.querySelector(".gallery");
+async function getCategories() {
+    const response = await fetch("http://localhost:5678/api/categories");
+    const data = await response.json();  // On transforme la réponse en format JSON
 
+    categories = data;
+}
+
+
+function createWorks(projects) {
+       
         projects.forEach(project => {
             const projectElement = document.createElement("figure");
 
@@ -23,9 +35,29 @@ async function getWorks() {
 
             gallery.appendChild(projectElement);
         });
-    } catch (error) {
-        console.error("Erreur lors de la récupération des projets:", error);
-    }
+
 }
 
-getWorks();
+// createButtons(obj) {
+//     addeventluister(, () => {
+//         console.log(obj.id)
+//     })
+// }
+
+// createFilters() {
+//     createButton({name: "Tous", id: 0})
+//     categories.forEach(category => {
+//         createButton(category)
+//     })
+
+// }
+
+async function init() {
+    await getWorks();
+    await getCategories();
+    console.log(categories)
+    createWorks(works);
+}
+
+init()
+
