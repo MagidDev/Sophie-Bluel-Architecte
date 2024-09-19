@@ -2,6 +2,7 @@ const gallery = document.querySelector(".gallery");
 
 let works = [];
 let categories = [];
+const token = sessionStorage.getItem("token");
 
 // Récupère les projets via la requête fetch
 async function getWorks() {
@@ -39,9 +40,19 @@ function createButtons(category, filterContainer) {
     const button = document.createElement("button");
     button.innerText = category.name; // Afficher le nom de la catégorie sur le bouton
 
-    console.log("Bouton créé pour la catégorie :", category.name);
+    button.classList.add("filter-button");
+
+    console.log(button); // vérifie si le bouton a bien la classe "filter-button"
 
     button.addEventListener("click", () => {
+        // Enlever la classe "active" de tous les boutons
+        const allButtons = document.querySelectorAll(".filter-button");
+        allButtons.forEach(btn => btn.classList.remove("active"));
+
+        // Ajouter la classe "active" au bouton cliqué
+        button.classList.add("active");
+
+        // Afficher les projets filtrés
         if (category.id === 0) {
             createWorks(works); // Affiche tous les projets si l'ID est 0 (cas du bouton "Tous")
         } else {
@@ -81,3 +92,7 @@ async function init() {
 }
 
 init();
+
+if (token) {
+    document.querySelector('.admin-panel').style.display = 'flex';
+}
