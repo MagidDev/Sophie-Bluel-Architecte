@@ -310,3 +310,122 @@ footer nav ul {
 	justify-content: center;
 	align-items: center;
 }
+
+.modify-link {
+    color: black;
+	font-size: 15px;
+    margin-left: 10px; /* Espacement entre le texte et le lien */
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.modify-link:hover {
+    color: #145442;
+    text-decoration: underline;
+}
+
+.modal {
+    display: none; /* Caché par défaut */
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+	height: 688px;
+    max-width: 630px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.gallery-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Toujours 5 colonnes */
+    grid-column-gap: 0px; /* Espacement horizontal plus petit */
+    row-gap: 35px; /* Espacement vertical plus grand */
+    justify-items: center; /* Centrer les miniatures dans chaque cellule */
+    margin: 20px;
+}
+
+.thumbnail {
+    position: relative;
+    width: 100px; /* Taille des miniatures */
+    height: 100px;
+}
+
+.thumbnail img {
+    width: 76.61px;
+    height: 102.57px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.delete-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-photo-btn {
+    background-color: #1D6154;
+    cursor: pointer; /* Correction de la syntaxe */
+}
+
+.validate-btn {
+    background-color: #afafaf; /* désactivé par défaut */
+    cursor: not-allowed;
+}
+
+/* Activer le bouton valider */
+.validate-btn.active {
+    background-color: #1D6154;
+    cursor: pointer;
+}
+
+/* Style au survol des boutons */
+.add-photo-btn:hover {
+    background-color: #145442;
+}
+
+/* Bouton "Ajouter une photo" actif */
+.add-photo-btn.active {
+    background-color: #1D6154;
+    cursor: pointer;
+    pointer-events: auto; /* Le bouton est cliquable quand il est activé */
+}
+
+.add-photo-btn.active:hover {
+    background-color: #145442; /* Couleur lors du survol quand le bouton est activé */
+}
+
+#modal-add-photo input, #modal-add-photo select {
+    width: 420px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-family: 'Work Sans', sans-serif;
+}

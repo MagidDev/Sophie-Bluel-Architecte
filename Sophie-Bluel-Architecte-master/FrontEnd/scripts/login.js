@@ -35,6 +35,4 @@ loginForm.addEventListener('submit', async (e) => {
        sessionStorage.setItem('token', data.token);
        location.href = '/';
     }
-
-
 })
