@@ -3,6 +3,15 @@ const loginEmail = document.querySelector('#email');
 const loginPassword = document.querySelector('#password');
 const errorElement = document.querySelector('.error');
 
+document.addEventListener("DOMContentLoaded", function() {
+    const loginLink = document.querySelector('a[href="login.html"]');
+    
+    // Vérifie si l'URL contient "login.html"
+    if (window.location.href.includes("login.html")) {
+      loginLink.classList.add("active");
+    }
+  });
+
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     

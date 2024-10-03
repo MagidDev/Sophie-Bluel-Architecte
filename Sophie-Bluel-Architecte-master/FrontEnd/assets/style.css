@@ -53,11 +53,20 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
+
+
 header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
 }
+
+header img {
+    width: 22px;
+    height: 22px;
+}
+
 section {
 	margin: 50px 0
 }
@@ -92,12 +101,21 @@ nav ul {
 }
 nav li {
 	padding: 0 10px;
-	font-size: 1.2em;
+	font-size: 16px;
 }
 
 li:hover {
 	color: #B1663C;
 }
+
+a {
+    text-decoration: none;
+}
+
+.active {
+    font-weight: bold;
+}
+  
 #introduction {
 	display: flex;
 	align-items: center;
@@ -123,7 +141,7 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin: 3em;
 }
 
 .filters {
@@ -168,7 +186,7 @@ li:hover {
 }
 #contact {
 	width: 50%;
-margin: auto;
+    margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -221,13 +239,11 @@ footer nav ul {
     width: 100%;
     max-width: 400px;
     margin: 50px auto;
-	margin-top: 17%;
-    padding: 20px;
+	margin-top: 10%;
     background-color: #fff;
     display: flex;
     flex-direction: column; /* Empile les éléments en colonne */
     gap: 1em; /* Espace entre chaque élément */
-    align-items: center; /* Centre les éléments horizontalement */
 }
 
 #login h2 {
@@ -241,12 +257,14 @@ footer nav ul {
     display: flex;
     flex-direction: column;
     gap: 1em; /* Espace entre les champs du formulaire */
+    margin-bottom: 5px;
 }
 
 #login label {
     font-family: 'Work Sans';
     font-size: 14px;
     text-align: left;
+    font-weight: bold;
 }
 
 #login input[type="email"],
@@ -279,7 +297,7 @@ footer nav ul {
     color: #1D6154;
     text-align: center;
     display: block;
-    margin-top: 1em;
+    text-decoration: underline;
 }
 
 .login-footer {
@@ -289,6 +307,10 @@ footer nav ul {
     padding: 20px;
     text-align: right;
     width: auto;
+}
+
+.login-footer li {
+    font-size: 14px;
 }
 
 .error {
@@ -309,6 +331,7 @@ footer nav ul {
 	display: none;
 	justify-content: center;
 	align-items: center;
+    gap: 10px;
 }
 
 .modify-link {
@@ -336,17 +359,114 @@ footer nav ul {
 }
 
 .modal-content {
+    position: relative;
     background-color: #fff;
     margin: 5% auto;
     padding: 20px;
     border-radius: 10px;
-	height: 688px;
-    max-width: 630px;
+	height: 670px;
+    width: 630px;
     text-align: center;
 }
 
+.modal-content h2 {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 26px;
+    font-family: 'Work Sans';
+    color: black;
+    font-weight: 500;
+}
+
+/* Cache le champ input file par défaut */
+#upload-image {
+    display: none;
+}
+
+/* La zone qui entoure le bouton */
+.group-image {
+    width: 420px;
+    height: 169px;
+    background-color: #E8F1F6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    position: relative; /* Nécessaire pour le positionnement interne */
+    margin: 0 auto; /* Centre la zone horizontalement */
+    margin-bottom: 30px;
+}
+
+.form-group i {
+    font-size: 60px; /* Taille de l'icône */
+    color: #B9C5CC; /* Couleur de l'icône */
+    margin-bottom: 10px; /* Espace entre l'icône et le bouton */
+    display: block; /* Place l'icône sur une ligne à part */
+    text-align: center; /* Centre l'icône horizontalement */
+}
+
+
+.form-group.text-group {
+    display: flex;
+    flex-direction: column; /* Empile les éléments verticalement */
+    align-items: center; /* Centre le champ de saisie */
+    margin-bottom: 20px; /* Espace entre les groupes de champs */
+}
+
+/* Style pour les labels, aligné à gauche */
+.form-group.text-group label {
+    width: 100%; /* Prend toute la largeur du conteneur */
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    color: #333;
+    text-align: left; /* Aligne le texte du label à gauche */
+    margin-bottom: 5px; /* Espace entre le label et le champ */
+    margin-left: 208px;
+}
+
+/* Style pour les champs de saisie, centrés */
+.form-group.text-group input,
+.form-group.text-group select {
+    width: 420px; /* Taille fixe des champs */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+
+/* Le bouton "+ Ajouter photo" */
+.label-image {
+    display: inline-block;
+    width: 173px;
+    background-color: #CBD6DC;
+    color: #306685;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: none;
+    opacity: 1; /* Opacité à 1 pour être visible */
+}
+
+.label-image:hover {
+    background-color: #a3b5c1; /* Gris un peu plus foncé au survol */
+}
+
+/* Le texte sous le bouton */
+.file-hint {
+    font-size: 10px;
+    color: #666;
+    margin-top: 5px;
+}
+
+
 .close {
-    color: #aaa;
+    color: black;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -354,19 +474,19 @@ footer nav ul {
 
 .close:hover,
 .close:focus {
-    color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
 .gallery-thumbnails {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Toujours 5 colonnes */
-    grid-column-gap: 0px; /* Espacement horizontal plus petit */
-    row-gap: 35px; /* Espacement vertical plus grand */
-    justify-items: center; /* Centrer les miniatures dans chaque cellule */
-    margin: 20px;
+    grid-template-columns: repeat(5, 80px); /* Chaque colonne a une largeur de 80px */
+    grid-column-gap: 10px; /* Ajuste l'espace horizontal */
+    row-gap: 35px;
+    justify-items: center;
+    margin: 20px 65px ;
 }
+
 
 .thumbnail {
     position: relative;
@@ -378,26 +498,68 @@ footer nav ul {
     width: 76.61px;
     height: 102.57px;
     object-fit: cover;
-    border-radius: 5px;
 }
 
 .delete-icon {
     position: absolute;
     top: 5px;
-    right: 5px;
-    color: black;
-    font-size: 16px;
+    right: 17px;
+    color: rgb(255, 255, 255);
+    background-color: black;
+    font-size: 10px;
     cursor: pointer;
+    padding: 5px;
 }
+
+.back-arrow {
+    font-size: 24px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    color: #333;
+}
+
+.back-arrow:hover {
+    color: #1D6154; /* Change de couleur au survol */
+}
+
+.fa-arrow-left {
+    position: absolute; /* Permet de contrôler la position précise */
+    top: 24px; /* Ajuste la distance par rapport au haut */
+    left: 39px; /* Ajuste la distance par rapport à la gauche */
+    font-size: 24px; /* Taille de l'icône */
+    color: #333; /* Couleur de la flèche */
+    cursor: pointer; /* Ajoute un curseur "pointer" pour rendre la flèche cliquable */
+}
+
+
+.custom-line {
+    width: 420px;  /* Longueur de la ligne */
+    margin-top: 60px;
+    margin-bottom: 30px;
+    border: none;  /* Supprime la bordure par défaut */
+    border-top: 1px solid #B3B3B3;  /* Crée une ligne solide (tu peux ajuster l'épaisseur et la couleur) */
+  }
 
 .add-photo-btn {
     background-color: #1D6154;
+    color: white;
+    border: none;
+    width: 237px;
+    height: 36px;
+    border-radius: 16px;
+    font-size: 16px;
     cursor: pointer; /* Correction de la syntaxe */
 }
 
 .validate-btn {
     background-color: #afafaf; /* désactivé par défaut */
     cursor: not-allowed;
+    width: 237px;
+    height: 36px;
+    border-radius: 60px;
+    color: white;
 }
 
 /* Activer le bouton valider */
@@ -426,6 +588,7 @@ footer nav ul {
     width: 420px;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: none;
     font-family: 'Work Sans', sans-serif;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
 }

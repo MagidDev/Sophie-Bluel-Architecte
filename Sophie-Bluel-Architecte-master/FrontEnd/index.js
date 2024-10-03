@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const titleInput = document.querySelector('#photo-title');
     const categoryInput = document.querySelector('#photo-category');
     
-    // Update: Target the "Valider" button using its unique ID
+    // cible le bouton valider a l'aide de son ID unique
     const submitButton = document.querySelector('#submit-photo-btn'); 
     const modal = document.querySelector("#modal");
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const filtersContainer = document.createElement("div");
         filtersContainer.classList.add("filters");
 
-        const categories = ["Tous", "Objets", "Appartements", "Hotels et restaurants"];
+        const categories = ["Tous", "Objets", "Appartements", "Hotels & restaurants"];
         categories.forEach((category, index) => {
             const button = document.createElement("button");
             button.classList.add("filter-button");
@@ -70,15 +70,27 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (response.ok) {
-                removeProjectFromDOM(projectId);
+                removeProjectFromDOM(projectId); // Supprime le projet de la page d'accueil
                 console.log(`Projet avec l'ID ${projectId} supprimé`);
-            } else {
-                console.error("Échec de la suppression du projet");
-            }
-        } catch (error) {
-            console.error("Erreur lors de la requête de suppression:", error);
+
+                // Récupère les projets actuels et met à jour la galerie de la modale
+            works = await getWorks(); // Récupère à nouveau les projets
+            createModalGallery(works); // Met à jour la galerie de la modale
+        } else {
+            console.error("Échec de la suppression du projet");
         }
+    } catch (error) {
+        console.error("Erreur lors de la requête de suppression:", error);
     }
+}
+
+    // Fonction pour supprimer le projet de la galerie de la modale
+function removeProjectFromModalGallery(projectId) {
+    const projectElement = document.querySelector(`#gallery-thumbnails [data-id='${projectId}']`);
+    if (projectElement) {
+        projectElement.remove(); // Supprime le projet de la modale
+    }
+}
 
     // Supprime l'élément correspondant du DOM
     function removeProjectFromDOM(projectId) {
@@ -224,6 +236,18 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    document.querySelector('.back-arrow').addEventListener('click', function() {
+        const modalAddPhoto = document.getElementById('modal-add-photo');
+        const modalFirstView = document.getElementById('modal'); // Assure-toi d'avoir un ID pour la première vue de la modale
+    
+        // Masquer la deuxième vue
+        modalAddPhoto.style.display = 'none';
+        
+        // Afficher la première vue
+        modalFirstView.style.display = 'flex';
+    });
+    
+
     // Fermer les modales si on clique sur la croix
     const closeModalElements = document.querySelectorAll(".close");
     closeModalElements.forEach((closeBtn) => {
@@ -233,8 +257,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Fermer la modale en cliquant à l'extérieur de celle-ci
-    window.addEventListener("click", function (event) {
+     // Fermer la modale en cliquant à l'extérieur de celle-ci
+     window.addEventListener("click", function (event) {
         if (event.target === modal) {
             modal.style.display = "none";
         }
@@ -289,4 +313,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     init(); // Lancement de l'initialisation
+
+    const loginLink = document.querySelector('a[href="login.html"]');
+    if (token) {
+        loginLink.textContent = 'Log out';
+        loginLink.href = '#'; // Tu peux changer l'action ici si nécessaire
+
+        // Ajoute une action pour déconnecter l'utilisateur
+        loginLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            sessionStorage.removeItem('token'); // Supprime le token pour déconnexion
+            location.reload(); // Recharge la page pour refléter la déconnexion
+        });
+    }
 });

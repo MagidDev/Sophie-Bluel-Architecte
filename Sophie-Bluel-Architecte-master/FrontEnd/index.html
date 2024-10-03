@@ -53,6 +53,7 @@
 		<div id="gallery-thumbnails" class="gallery-thumbnails">
 			<!-- Les photos seront insérées ici dynamiquement -->
 		</div>
+		<hr class="custom-line">
 		<!-- Bouton Ajouter une photo -->
 		 <button id="add-photo-btn" class="add-photo-btn">Ajouter une photo</button>
 	</div>
@@ -60,25 +61,28 @@
 <aside id="modal-add-photo" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Ajouter photo</h2>
+		<i class="fa-solid fa-arrow-left back-arrow"></i>
+        <h2>Ajout photo</h2>
         <form id="add-photo-form">
             <div class="form-group group-image">
-                <label for="upload-image" class="label-image">+ Ajouter photo</label>
-                <input type="file" id="upload-image" accept="image/*" name="image" required>
-            </div>
-            <div class="form-group">
+				<i class="fa-regular fa-image"></i> <label for="upload-image" class="label-image">+ Ajouter photo</label>
+				<input type="file" id="upload-image" accept="image/*" name="image" required>
+				<span class="file-hint">jpg, png : 4mo max</span>
+			</div>			
+            <div class="form-group text-group">
                 <label for="photo-title">Titre</label>
                 <input type="text" id="photo-title" placeholder="" name="title" required>
             </div>
-            <div class="form-group">
+            <div class="form-group text-group">
                 <label for="photo-category">Catégorie</label>
                 <select id="photo-category" name="category" required>
-					<option value="">Choisir une catégorie</option>
+					<option value=""></option>
 					<option value="1">Objets</option>
 					<option value="2">Appartements</option>
 					<option value="3">Hotels et restaurants</option>
 				</select>
             </div>
+			<hr class="custom-line">
             <button id="submit-photo-btn" class="validate-btn" disabled>Valider</button>
         </form>
     </div>
