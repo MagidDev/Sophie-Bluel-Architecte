@@ -30,7 +30,9 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+    background-color: #FFFEF8;
 }
+
 ol, ul {
 	list-style: none;
 }
@@ -104,6 +106,17 @@ nav li {
 	font-size: 16px;
 }
 
+nav a {
+    color: black;
+    text-decoration: none;
+}
+
+
+nav a:visited {
+    color: black;
+}
+
+
 li:hover {
 	color: #B1663C;
 }
@@ -141,19 +154,21 @@ a {
 }
 #portfolio h2 {
 	text-align: center;
-	margin: 3em;
+	margin-top: 4em;
+    margin-bottom: 1em;
 }
 
 .filters {
 	display: flex;
 	justify-content: center;
+    margin-bottom: 35px;
 }
 
 .filter-button {
     font-family: 'Syne';
     font-weight: 700;
     color:#1D6154;
-    background-color: white;
+    background-color: #FFFEF8;
     margin: 8px;
     text-align: center;
     border-radius: 60px;
@@ -233,6 +248,10 @@ footer nav ul {
 	margin: 2em
 }
 
+footer {
+    background-color: white;
+}
+
 /*** Page de connexion***/
 
 #login {
@@ -240,7 +259,7 @@ footer nav ul {
     max-width: 400px;
     margin: 50px auto;
 	margin-top: 10%;
-    background-color: #fff;
+    background-color: #FFFEF8;
     display: flex;
     flex-direction: column; /* Empile les éléments en colonne */
     gap: 1em; /* Espace entre chaque élément */
@@ -290,7 +309,6 @@ footer nav ul {
     background-color: #145442;
 }
 
-/* Style pour le lien de mot de passe oublié */
 #login .forgot-password {
     font-family: 'Work Sans';
     font-size: 14px;
@@ -304,9 +322,8 @@ footer nav ul {
     position: absolute;
     bottom: 0;
     right: 0;
-    padding: 20px;
     text-align: right;
-    width: auto;
+    width: 100%;
 }
 
 .login-footer li {
@@ -332,12 +349,13 @@ footer nav ul {
 	justify-content: center;
 	align-items: center;
     gap: 10px;
+    width: 100%;
 }
 
 .modify-link {
     color: black;
 	font-size: 15px;
-    margin-left: 10px; /* Espacement entre le texte et le lien */
+    margin-left: 10px;
     cursor: pointer;
     text-decoration: none;
 }
@@ -553,6 +571,9 @@ footer nav ul {
     cursor: pointer; /* Correction de la syntaxe */
 }
 
+
+
+
 .validate-btn {
     background-color: #afafaf; /* désactivé par défaut */
     cursor: not-allowed;
@@ -590,5 +611,13 @@ footer nav ul {
     border-radius: 5px;
     border: none;
     font-family: 'Work Sans', sans-serif;
+    box-sizing: border-box;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+
+#modal-add-photo select {
+    appearance: none; /* Supprime le style natif des navigateurs */
+    -webkit-appearance: none; /* Pour Safari */
+    -moz-appearance: none; /* Pour Firefox */
 }

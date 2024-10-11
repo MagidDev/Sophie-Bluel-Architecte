@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let works = [];
     const token = sessionStorage.getItem("token");
 
-    // Assure-toi que la modale "Ajouter une photo" est cachée par défaut
+    // S'assure que la modale "Ajouter une photo" est cachée par défaut
     modalAddPhoto.style.display = "none";
 
     // Récupère les projets via la requête fetch
@@ -23,27 +23,41 @@ document.addEventListener("DOMContentLoaded", function () {
         return works;
     }
 
-    // Crée les filtres de catégories et place-les sous le titre "Mes Projets"
+    // Crée les filtres de catégories et les place sous le titre "Mes Projets"
     function createFilters() {
         const filtersContainer = document.createElement("div");
         filtersContainer.classList.add("filters");
-
+    
         const categories = ["Tous", "Objets", "Appartements", "Hotels & restaurants"];
         categories.forEach((category, index) => {
             const button = document.createElement("button");
             button.classList.add("filter-button");
             button.innerText = category;
             button.dataset.category = index;
-
+    
+            // Ajouter l'effet "actif" au clic
             button.addEventListener("click", function () {
+                // Retire la classe "active" de tous les boutons
+                document.querySelectorAll(".filter-button").forEach(btn => btn.classList.remove("active"));
+                
+                // Ajoute la classe "active" au bouton cliqué
+                button.classList.add("active");
+    
+                // Filtrer les projets
                 filterWorks(index);
             });
-
+    
             filtersContainer.appendChild(button);
         });
-
+    
         const portfolioSection = document.querySelector("#portfolio h2");
         portfolioSection.insertAdjacentElement("afterend", filtersContainer);
+    
+        // Activer le bouton "Tous" par défaut
+        const allButton = filtersContainer.querySelector('button[data-category="0"]');
+        if (allButton) {
+            allButton.classList.add("active"); // Ajoute la classe active au bouton "Tous"
+        }
     }
 
     // Fonction pour filtrer les projets en fonction de la catégorie
@@ -163,12 +177,15 @@ function removeProjectFromModalGallery(projectId) {
         const img = document.createElement('img');
         img.src = url;
         img.alt = 'image temporaire';
-        img.style.width = '100px';
-        img.style.height = '150px';
+        img.style.width = 'auto';
+        img.style.height = '100%';
         const imagePreview = document.querySelector('.group-image img');
         if (imagePreview) {
             imagePreview.remove(); // Remplace l'image précédente s'il y en a une
         }
+        document.querySelector('.group-image label').style.display = 'none';
+        document.querySelector('.group-image i').style.display = 'none';
+        document.querySelector('.group-image span').style.display = 'none';
         document.querySelector('.group-image').appendChild(img);
         checkFormCompletion(); // Vérifie le formulaire à chaque upload d'image
     });
@@ -190,6 +207,11 @@ function removeProjectFromModalGallery(projectId) {
 
             if (response.ok) {
                 console.log('Photo ajoutée avec succès');
+                addPhotoForm.reset()
+                document.querySelector('.group-image label').style.display = 'block';
+                document.querySelector('.group-image i').style.display = 'block';
+                document.querySelector('.group-image span').style.display = 'block';
+                document.querySelector('.group-image img').remove();
                 modalAddPhoto.style.display = "none";
                 works = await getWorks();
                 createWorks(works); // Actualise la galerie avec la nouvelle photo
@@ -238,7 +260,7 @@ function removeProjectFromModalGallery(projectId) {
 
     document.querySelector('.back-arrow').addEventListener('click', function() {
         const modalAddPhoto = document.getElementById('modal-add-photo');
-        const modalFirstView = document.getElementById('modal'); // Assure-toi d'avoir un ID pour la première vue de la modale
+        const modalFirstView = document.getElementById('modal'); // S'assure d'avoir un ID pour la première vue de la modale
     
         // Masquer la deuxième vue
         modalAddPhoto.style.display = 'none';
@@ -312,12 +334,51 @@ function removeProjectFromModalGallery(projectId) {
         }
     }
 
+    function resetAddPhotoModal() {
+        addPhotoForm.reset(); // Réinitialise les champs du formulaire
+    
+        document.querySelector('.group-image label').style.display = 'block';
+        document.querySelector('.group-image i').style.display = 'block';
+        document.querySelector('.group-image span').style.display = 'block';
+    
+        const imagePreview = document.querySelector('.group-image img');
+        if (imagePreview) {
+            imagePreview.remove(); // Supprime l'image affichée
+        }
+    
+        submitButton.disabled = true;
+        submitButton.classList.remove("active");
+    }
+
+    // Quand on ferme la modale avec la croix ou clique en dehors
+closeModalElements.forEach((closeBtn) => {
+    closeBtn.addEventListener("click", function () {
+        modalAddPhoto.style.display = 'none';
+        resetAddPhotoModal(); // Réinitialise le formulaire
+    });
+});
+
+window.addEventListener("click", function (event) {
+    if (event.target === modalAddPhoto) {
+        modalAddPhoto.style.display = 'none';
+        resetAddPhotoModal(); // Réinitialise ici aussi
+    }
+});
+
+// Flèche de retour à la première vue
+document.querySelector('.back-arrow').addEventListener('click', function() {
+    modalAddPhoto.style.display = 'none';
+    modal.style.display = 'flex'; // Retour à la première vue
+
+    resetAddPhotoModal(); // Réinitialise le formulaire à chaque fois
+});
+
     init(); // Lancement de l'initialisation
 
     const loginLink = document.querySelector('a[href="login.html"]');
     if (token) {
-        loginLink.textContent = 'Log out';
-        loginLink.href = '#'; // Tu peux changer l'action ici si nécessaire
+        loginLink.textContent = 'Logout';
+        loginLink.href = '#';
 
         // Ajoute une action pour déconnecter l'utilisateur
         loginLink.addEventListener('click', function (e) {
